@@ -1,4 +1,6 @@
 *.iml
+*.bks
+*.conf
 .gradle
 /local.properties
 /.idea/caches
