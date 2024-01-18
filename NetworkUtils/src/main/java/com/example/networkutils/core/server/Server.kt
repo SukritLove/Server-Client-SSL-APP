@@ -62,16 +62,25 @@ fun startServer(ipAddress: String, context: Context) {
 }
 
 fun Application.module() {
+
     configureSerialization()
     routing {
+
         webSocket("/") {
             sendSerialized(Message(message = "The Server is OPENED!"))
+            println("Request From ${call.request.origin.remoteHost}")
+            println("Sending : The Server is OPENED!")
         }
         webSocket("/Greeting") {
             sendSerialized(Message(message = "Hello there, This is SERVER!"))
+            println("Request From ${call.request.origin.remoteHost}")
+            println("Sending : Hello there, This is SERVER!")
         }
         webSocket("/GetIp") {
-            sendSerialized(Message(message = "Your ip : 192.168.101.149"))
+            val remoteHostIP = call.request.origin.remoteHost
+            sendSerialized(Message(message = "Your ip : $remoteHostIP"))
+            println("Request From ${call.request.origin.remoteHost}")
+            println("Sending : Your ip : $remoteHostIP")
         }
 
     }

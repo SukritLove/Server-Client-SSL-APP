@@ -39,6 +39,7 @@ suspend fun sendMessage(
     }
     var receivedMessage = ""
     val requestProtocol = if (SslControler) URLProtocol.WS else URLProtocol.WSS
+    println(requestProtocol.name)
     try {
         cioClient.webSocket(
             method = HttpMethod.Get,
