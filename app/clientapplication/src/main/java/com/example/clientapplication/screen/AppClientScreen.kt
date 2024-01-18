@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -35,8 +36,9 @@ import kotlinx.coroutines.withContext
 fun AppClientScreen() {
     MaterialTheme {
         val ipAddress = remember { mutableStateOf(TextFieldValue("192.168.101.149")) }
-        val port = remember { mutableStateOf(TextFieldValue("8080")) }
+        var port by remember { mutableStateOf("8000") }
         val textReceive: MutableState<String?> = remember { mutableStateOf("") }
+        var checked by remember { mutableStateOf(false) }
         val scope = rememberCoroutineScope()
         val context = LocalContext.current
         Column(
@@ -53,14 +55,26 @@ fun AppClientScreen() {
             )
             Spacer(Modifier.padding(20.dp))
             TextField(
-                value = port.value,
-                onValueChange = { port.value = it },
+                value = port,
+                onValueChange = { port = it },
                 label = { Text("Enter Port") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
             Spacer(Modifier.padding(20.dp))
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
+                Switch(checked = checked, onCheckedChange = {
+                    checked = it
+                    port = if (!checked) "8000" else "8080"
+                })
+                Text(if (checked) "SSL ON" else "SSL OFF")
+            }
+            Spacer(Modifier.padding(20.dp))
             val functionName = listOf("Check Connection", "Gretting to Server", "Tell My IP")
             val routeCommand = listOf("/", "/Greeting", "/GetIp")
             val functionRouteMap = functionName.zip(routeCommand).toMap()
@@ -92,8 +106,9 @@ fun AppClientScreen() {
                             textReceive.value = sendMessage(
                                 routeCommand = selectedValue,
                                 ipAddress = ipAddress.value.text,
-                                port = port.value.text.toInt(),
-                                context = context
+                                port = port.toInt(),
+                                context = context,
+                                SslControler = !checked
                             )
                         }
                     }

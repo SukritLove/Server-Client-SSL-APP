@@ -21,7 +21,8 @@ suspend fun sendMessage(
     routeCommand: String,
     ipAddress: String,
     port: Int,
-    context: Context
+    context: Context,
+    SslControler: Boolean
 ): String {
 
     val cioClient = HttpClient(CIO) {
@@ -37,7 +38,7 @@ suspend fun sendMessage(
         }
     }
     var receivedMessage = ""
-
+    val requestProtocol = if (SslControler) URLProtocol.WS else URLProtocol.WSS
     try {
         cioClient.webSocket(
             method = HttpMethod.Get,
@@ -45,7 +46,7 @@ suspend fun sendMessage(
             port = port,
             path = routeCommand,
             request = {
-                url.protocol = URLProtocol.WSS
+                url.protocol = requestProtocol
             }
         ) {
             receivedMessage = receiveDeserialized<MessageSerialData>().message
@@ -61,3 +62,6 @@ suspend fun sendMessage(
     return receivedMessage
 }
 
+private fun normalClient(){
+
+}
