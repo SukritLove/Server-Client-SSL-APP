@@ -71,8 +71,7 @@ fun Application.module() {
             sendSerialized(Message(message = "Hello there, This is SERVER!"))
         }
         webSocket("/GetIp") {
-            val senderIp = call.request.origin.remoteAddress
-            sendSerialized(Message(message = "Your ip : $senderIp"))
+            sendSerialized(Message(message = "Your ip : 192.168.101.149"))
         }
 
     }

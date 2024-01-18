@@ -1,4 +1,4 @@
-val ktor_version = "2.3.7"
+val ktor_version = "2.1.0"
 
 plugins {
     id("com.android.library")
