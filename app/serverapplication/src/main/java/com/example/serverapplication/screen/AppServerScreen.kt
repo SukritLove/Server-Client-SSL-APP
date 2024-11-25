@@ -59,7 +59,7 @@ fun AppServerScreen(networkUtils: PlatformNetworkingUtils) {
         Spacer(modifier = Modifier.padding(40.dp))
         deviceIpAddress?.let {
             Text(
-                text = "Server is listening on $it :: 8080"
+                text = "Server is listening on $it :: 8000"
             )
         }
 

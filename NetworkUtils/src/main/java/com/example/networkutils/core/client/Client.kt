@@ -31,8 +31,8 @@ suspend fun sendMessage(
         }
         engine {
             https {
-                trustManager = SslSettings(context).getTrustManager()
-                addKeyStore(SslSettings(context).getKeyStore(), "1q2w3e4r".toCharArray())
+//                trustManager = SslSettings(context).getTrustManager()
+//                addKeyStore(SslSettings(context).getKeyStore(), "1q2w3e4r".toCharArray())
                 cipherSuites = CIOCipherSuites.SupportedSuites
             }
         }

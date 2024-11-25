@@ -18,16 +18,16 @@ android {
     }
     signingConfigs {
         getByName("debug") {
-            storeFile =
-                file("/Users/sukrit_love/AndroidStudioProjects/ServerClientSSL/NetworkUtils/src/main/assets/keystore.bks")
+//            storeFile =
+//                file("/Users/sukrit_love/AndroidStudioProjects/ServerClientSSL/NetworkUtils/src/main/assets/keystore.bks")
             storePassword = "1q2w3e4r"
             keyPassword = "1q2w3e4r"
             keyAlias = "examplealias"
             storeType = "BKS"
         }
         create("release") {
-            storeFile =
-                file("/Users/sukrit_love/AndroidStudioProjects/ServerClientSSL/NetworkUtils/src/main/assets/keystore.bks")
+//            storeFile =
+//                file("/Users/sukrit_love/AndroidStudioProjects/ServerClientSSL/NetworkUtils/src/main/assets/keystore.bks")
             storePassword = "1q2w3e4r"
             keyPassword = "1q2w3e4r"
             keyAlias = "examplealias"
